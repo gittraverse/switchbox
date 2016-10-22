@@ -3,17 +3,18 @@ var finderJava = function(code){
   var classMatch = /public class \w+/;
   var methodMatch = /(public|private) (static)? \w+ \w+/;
   var moc = [];
+  var curClass;
   for(var i = 0; i < codeArray.length; i++)
   {
   	if(codeArray[i].match(classMatch)){
   		var segment = codeArray[i].match(classMatch);
-  		var curClass = segment[0].replace(/public class /,"");
-  		moc.push({line: i, name: curClass, type: "class"})
+  		curClass = segment[0].replace(/public class /,"");
+  		moc.push({line: i+1, name: curClass, type: "class"})
   	}
   	if(codeArray[i].match(methodMatch)){
   		var segment = codeArray[i].match(methodMatch);
   		var curMethod = segment[0].replace(/(public|private) (static)? \w+ /,"");
-  		moc.push({line: i, name: curMethod, type: "method"})
+  		moc.push({line: i+1, name: curMethod, type: "method",class:curClass})
   	}
   }
   return moc;
