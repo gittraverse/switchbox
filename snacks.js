@@ -25,8 +25,8 @@ var finderJavascript = function(code) {
 
 var finder = function(extension){
   return {
-    '.java': finderJava,
-    '.js', finderJavascript,
+    '.java': finderJava//,
+    //'.js', finderJavascript,
   }[extension];
 }
 
